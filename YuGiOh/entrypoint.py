@@ -1,3 +1,3 @@
 from scrapy.cmdline import execute
 
-execute(['scrapy', 'crawl', 'monster'])
+execute(['scrapy', 'crawl', 'YuGiOhMonsterSpider', '-o', 'monster.csv'])
