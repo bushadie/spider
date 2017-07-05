@@ -1,0 +1,16 @@
+X-Nws-Log-Uuid: 12eb4693-657d-481f-b6bc-d1218d67e26d
+Content-Encoding: gzip
+Set-Cookie: DedeUserID=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/
+Set-Cookie: DedeUserID__ckMd5=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/
+Set-Cookie: DedeLoginTime=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/
+Set-Cookie: DedeLoginTime__ckMd5=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/
+X-Cache-Lookup: Hit From Upstream
+X-Cache-Lookup: Hit From Inner Cluster
+X-Cache-Lookup: Hit From Upstream
+Expires: Wed, 05 Jul 2017 02:05:55 GMT
+Server: nginx/1.6.2
+X-Daa-Tunnel: hop_count=3
+Last-Modified: Wed, 23 Dec 2015 08:34:47 GMT
+Cache-Control: must-revalidate, max-age=60
+Date: Wed, 05 Jul 2017 02:04:55 GMT
+Content-Type: text/html; charset=gb2312
