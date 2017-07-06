@@ -8,6 +8,7 @@
 import scrapy
 
 
+# 爬取知乎上 游戏王哪些卡图极具美感
 class ZhihuBeautifulImgItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
