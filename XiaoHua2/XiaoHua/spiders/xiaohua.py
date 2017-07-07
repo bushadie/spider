@@ -28,8 +28,8 @@ class Myspider(scrapy.Spider):
             #创建实例,并转化为字典
             item=XiaohuaItem()
             item['siteURL']=main[0]
-            item['title']=main[1]
             items.append(item)
+            item['title']=main[1]
 
         for item in items:
             #用meta传入下一层

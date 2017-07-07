@@ -23,7 +23,7 @@ DEFAULT_REQUEST_HEADERS = {
 
 # 管道设置
 ITEM_PIPELINES = {'XiaoHua.pipelines.XiaohuaPipeline': 1}
-IMAGES_STORE = r'F:\\Desktop\code\info\XiaoHua2'
+IMAGES_STORE = r'd:\\desk\XiaoHua2'
 
 # IMAGES_THUMBS用于生成大小不同的缩略图
 # 以字典形式表示，键为文件名，值为图片尺寸
