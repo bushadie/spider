@@ -10,7 +10,6 @@ import time
 import os.path
 from PIL import Image
 
-
 user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5)'
 headers = {'User-Agent': user_agent}
 
@@ -21,6 +20,7 @@ try:
 except:
     print "Cookie 未能加载"
 
+
 def get_xsrf():
     '''_xsrf 是一个动态变化的参数'''
     index_url = "http://www.zhihu.com"
@@ -30,11 +30,12 @@ def get_xsrf():
     _xsrf = re.findall(pattern, html)
     return _xsrf[0]
 
+
 def get_captcha():
     t = str(int(time.time() * 1000))
     captcha_url = 'http://www.zhihu.com/captcha.gif?r' + t + "&type=login"
     print captcha_url
-    r = session.get(captcha_url, headers = headers)
+    r = session.get(captcha_url, headers=headers)
     with open('captcha.jpg', 'wb') as f:
         f.write(r.content)
         f.close()
@@ -43,9 +44,10 @@ def get_captcha():
         im.show()
         im.close()
     except:
-        print u'captcha.jpg 所在目录:%s, 手动输入'% os.path.abspath('captcha.jpg')
+        print u'captcha.jpg 所在目录:%s, 手动输入' % os.path.abspath('captcha.jpg')
     captcha = input("input captcha\n")
     return captcha
+
 
 def isLogin():
     url = "https://www.zhihu.com/settings/profile"
@@ -55,6 +57,7 @@ def isLogin():
         return True
     else:
         return False
+
 
 def login(secret, account):
     if isLogin():
@@ -88,7 +91,7 @@ def login(secret, account):
         print '需要验证码'
         postdata['captcha'] = get_captcha()
         login_page = session.post(post_url, data=postdata, headers=headers)
-        login_code = eval(login_page.text)   #eval 从字符串中提取字典
+        login_code = eval(login_page.text)  # eval 从字符串中提取字典
         u = login_code['msg']
     session.cookies.save()
 
@@ -99,14 +102,14 @@ def getImageUrl():
     size = 10
     allImageUrl = []
 
-    #循环直至爬完整个问题的回答
-    while(True):
+    # 循环直至爬完整个问题的回答
+    while (True):
         print '===========offset: ', size
         postdata = {
             'method': 'next',
-            'params': '{"url_token":' + str(46435597) + ',"pagesize": "10",' +\
+            'params': '{"url_token":' + str(46435597) + ',"pagesize": "10",' + \
                       '"offset":' + str(size) + "}",
-            '_xsrf':get_xsrf(),
+            '_xsrf': get_xsrf(),
 
         }
         size += 10
@@ -115,19 +118,19 @@ def getImageUrl():
         listMsg = ret['msg']
 
         if not listMsg:
-            print "图片URL获取完毕, 页数: ", (size-10)/10
+            print "图片URL获取完毕, 页数: ", (size - 10) / 10
             return allImageUrl
         pattern = re.compile('data-actualsrc="(.*?)">', re.S)
         for pageUrl in listMsg:
             items = re.findall(pattern, pageUrl)
-            for item in items:      #这里去掉得到的图片URL中的转义字符'\\'
+            for item in items:  # 这里去掉得到的图片URL中的转义字符'\\'
                 imageUrl = item.replace("\\", "")
                 allImageUrl.append(imageUrl)
 
 
 def saveImagesFromUrl(filePath):
     imagesUrl = getImageUrl()
-    print "图片数: ", len(imageUrl)
+    print "图片数: ", len(imagesUrl)
     if not imagesUrl:
         print 'imagesUrl is empty'
         return
@@ -151,5 +154,6 @@ def saveImagesFromUrl(filePath):
             print '连接超时,URL: ', image
     print '图片下载完毕'
 
-login('这是你的知乎密码','这是你的知乎账户')
+
+login('17857027354', '17857027354')
 saveImagesFromUrl('/Volumes/HDD/Picture')
