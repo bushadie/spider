@@ -1,0 +1,50 @@
+# -*- coding:utf-8 -*-
+from urlparse import urlsplit
+from os.path import basename
+import urllib2
+import re
+import requests
+import os
+import json
+import urllib
+
+if not os.path.exists('images'):
+    os.mkdir("images")
+
+page_size = 50
+offset = 0
+x = 0
+
+id = 34867032
+url = 'https://www.zhihu.com/question/34867032'
+url_content = urllib2.urlopen(url).read()
+
+while offset < 100:
+
+    get_url = 'https://www.zhihu.com/api/v4/questions/34867032/answers?sort_by=default&include=data%5B%2A%5D.is_normal%2Cis_sticky%2Ccollapsed_by%2Csuggest_edit%2Ccomment_count%2Ccan_comment%2Ccontent%2Ceditable_content%2Cvoteup_count%2Creshipment_settings%2Ccomment_permission%2Cmark_infos%2Ccreated_time%2Cupdated_time%2Crelationship.is_authorized%2Cis_author%2Cvoting%2Cis_thanked%2Cis_nothelp%2Cupvoted_followees%3Bdata%5B%2A%5D.author.badge%5B%3F%28type%3Dbest_answerer%29%5D.topics&limit=20&offset=' + str(
+        offset)
+
+    header = {
+        'User-Agent': "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:34.0) Gecko/20100101 Firefox/34.0",
+        'Host': "www.zhihu.com",
+        'Referer': "https://www.zhihu.com/question/34867032",
+        'Authorization': "Bearer Mi4wQUJDTXVUc0Y5QWdBSUFMS0RiVk5DeGNBQUFCaEFsVk4tQTFiV1FBZVpkaHBZRTFDWVh3OXJtZlpGa0x2MkpfSk9n|1497494260|7cc3b8925cfc9e47ef0e2bb6a8e96d45827deb2d"
+    }
+
+    req = urllib2.Request(get_url, headers=header)
+    response = urllib2.urlopen(req).read()
+    txt = json.loads(response)
+    print txt
+    offset += 20
+    img_urls = re.findall('img .*?src="(.*?_b.*?)"', str(txt))
+    for img_url in img_urls:
+        try:
+            x += 1
+            img_data = urllib2.urlopen(img_url).read()
+            # file_name = basename(urlsplit(img_url)[2])
+            output = open('images/' + str(x), 'wb')
+            output.write(img_data)
+            output.close()
+        except:
+            pass
+print x

@@ -10,12 +10,11 @@ from scrapy.exceptions import DropItem
 from scrapy.pipelines.images import ImagesPipeline
 import settings
 import sys
-
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-class ZhihuBeautifulImgPipeline(object):
+class ZhihuBeautifulImgPipeline(ImagesPipeline):
     # 用get_media_requests方法进行下载控制，返回一个requests对象
     # 对象被Pipeline处理，下载结束后，默认直接将结果传给item_completed方法
     def get_media_requests(self, item, info):
@@ -30,5 +29,5 @@ class ZhihuBeautifulImgPipeline(object):
         return item
         pass
 
-    def process_item(self, item, spider):
-        return item
+    # def process_item(self, item, spider):
+    #     return item
